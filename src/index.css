@@ -1,13 +1,76 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+*{
+  box-sizing:border-box;
+}
+
+/* mobile */
+html { font-size: 10px; }
+
+/* tablet */
+@media only screen and (min-width: 480px) {
+  html { font-size: 14px; }
+}
+
+/* desktop */
+@media only screen and (min-width: 768px) {
+  html { font-size: 18px; }
+}
+
+/* extra large monitor */
+@media only screen and (min-width: 1024px) {
+  html { font-size: 20px; }
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+h1{
+color:#38571e;
+font-weight:700;
+font-size: 4rem;
+}
+
+body{
+font-family:-apple-system,BlinkMacSystemFont,Helvetica Neue,Helvetica,sans-serif;
+height:100%;
+display:flex;
+flex-direction:column;
+background:#ecece4;
+}
+
+.table-and-tasks{
+  display:flex;
+  align-items: center;
+  width:100%;
+}
+
+/* container for time table */
+.time-table {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-around;
+  height: 650px;
+  width: 40%;
+  background: rgb(167, 190, 168);
+  border-radius: 3rem 0rem 0rem 3rem;
+  color:#122502;
+  font-weight:700;
+  font-size: 4rem;
+  margin: .8rem;
+}
+
+/* container for to-dos */
+.task-list {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-around;
+  height: 650px;
+  width: 55%;
+  background: #122502;
+  border-radius: 0rem 3rem 3rem 0rem;
+  color:rgb(167, 190, 168);
+  font-weight:700;
+  font-size: 4rem;
+  margin: .8rem;
 }
