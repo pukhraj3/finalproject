@@ -39,6 +39,7 @@ flex-direction:column;
 background:#ecece4;
 }
 
+/* container for time table and task list side by side */
 .table-and-tasks{
   display:flex;
   align-items: center;
@@ -57,20 +58,21 @@ background:#ecece4;
   color:#122502;
   font-weight:700;
   font-size: 4rem;
-  margin: .8rem;
+  padding: 1rem;
 }
 
 /* container for to-dos */
 .task-list {
   display: flex;
   align-items: flex-start;
-  justify-content: space-around;
+  justify-content: center;
   height: 650px;
   width: 55%;
   background: #122502;
   border-radius: 0rem 3rem 3rem 0rem;
-  color:rgb(167, 190, 168);
+  color:#a7bea8;
   font-weight:700;
   font-size: 4rem;
-  margin: .8rem;
+  padding: 1rem;
 }
+
