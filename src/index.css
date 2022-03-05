@@ -51,8 +51,8 @@ background:#ecece4;
   display: flex;
   align-items: flex-start;
   justify-content: space-around;
-  height: 650px;
-  width: 40%;
+  height: 675px;
+  width: 45%;
   background: rgb(167, 190, 168);
   border-radius: 3rem 0rem 0rem 3rem;
   color:#122502;
@@ -66,7 +66,7 @@ background:#ecece4;
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  height: 650px;
+  height: 675px;
   width: 55%;
   background: #122502;
   border-radius: 0rem 3rem 3rem 0rem;
@@ -76,3 +76,23 @@ background:#ecece4;
   padding: 1rem;
 }
 
+.popUp {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  height: 675px;
+  width: 100%;
+  background:rgba(233, 233, 233, 0.4)
+}
+
+.task-popUp{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 450px;
+  width: 400px;
+  background: rgb(255, 255, 255);
+  margin-left: 600px;
+  border-radius: 15%;
+}
