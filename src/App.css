@@ -1,0 +1,118 @@
+*{
+    box-sizing:border-box;
+  }
+  
+  /* mobile */
+  html { font-size: 10px; }
+  
+  /* tablet */
+  @media only screen and (min-width: 480px) {
+    html { font-size: 14px; }
+  }
+  
+  /* desktop */
+  @media only screen and (min-width: 768px) {
+    html { font-size: 18px; }
+  }
+  
+  /* extra large monitor */
+  @media only screen and (min-width: 1024px) {
+    html { font-size: 20px; }
+  }
+  
+  code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+      monospace;
+  }
+  
+  h1{
+  color:#38571e;
+  font-weight:700;
+  font-size: 4rem;
+  }
+  
+  body{
+  font-family:-apple-system,BlinkMacSystemFont,Helvetica Neue,Helvetica,sans-serif;
+  height:100%;
+  display:flex;
+  flex-direction:column;
+  background:#ecece4;
+  margin-top: 3rem;
+  }
+
+  button.MuiButtonBase-root{
+  background: #c97c5d;
+  color: #5d576b;
+  }
+
+  button.MuiIconButton-root{
+  background: #ecece4;
+  }
+
+  .timetable-header{
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    position: absolute;
+    width: 50%;
+    margin-right: 50%;
+    background: #12250200;
+    color:#5d576b;
+    font-weight:700;
+    font-size: 4rem;  
+    margin-top: -2rem;
+  }
+
+  .task-header{
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    position: absolute;
+    width: 50%;
+    margin-left: 50%;
+    background: #12250200;
+    color:#5d576b;
+    font-weight:700;
+    font-size: 4rem;  
+    margin-top: -2rem;
+  }
+  
+  /* greying out background for popup */
+  .popUp {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    height: 675px;
+    width: 100%;
+    background:rgba(233, 233, 233, 0.829);
+    margin-top: -2rem;
+  }
+  
+  /* create new task popup */
+  .task-popUp{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    height: 27.5rem;
+    width: 33.5rem;
+    background: #c97c5d;
+    margin-left: 35rem;
+    margin-top: 3.5rem;
+    border-radius: 6%;
+  }
+
+  .popUp-header{
+    display: flex;
+    align-items: flex-end;
+    margin-left:28rem;
+    margin-top: 1rem;
+  }
+
+  .popUp-textfield{
+    display: flex;
+    align-items: center;
+    margin-top: 10rem;
+
+  }
+  
