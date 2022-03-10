@@ -7,9 +7,9 @@ import IconButton from '@mui/material/IconButton';
 import AddIcon from '@mui/icons-material/Add';
 import CloseIcon from '@mui/icons-material/Close';
 import CheckIcon from '@mui/icons-material/Check';
-import TextInput from "./TextInput";
-import { TextField } from "@mui/material";
-import "./TextInput.css";
+// import TextInput from "./TextInput";
+import { Input, TextField } from "@mui/material";
+// import "./TextInput.css";
 import OppositeContentTimeline from "./Timeline";
 
 
@@ -24,11 +24,9 @@ const itemsFromBackend = [
 
 const columnsFromBackend = {
   [uuid()]: {
-    // name: "SCHEDULE",
     items: itemsFromBackend
   },
   [uuid()]: {
-    // name: "TO DO",
     items: []
   }
 };
@@ -81,8 +79,18 @@ function App() {
     setPopUp(false)
   }
 
-  function newTask(){
+  function NewTask(props) {
     setPopUp(false)
+    const { handleTask } = props;
+    
+    const [task, setTask] = useState([]);
+
+    function TaskCard(props) {
+      const {task} = props
+      return (
+        {id: uuid(), content: task}
+      )
+    }
   }
 
   const [columns, setColumns] = useState(columnsFromBackend);
@@ -105,8 +113,13 @@ function App() {
             </div>
             <div className="popUp-textfield">
               <TextField id="outlined-basic" label="New Task" variant="outlined"> 
+                <input
+                  type="text"
+                  name="task"
+                  onChange={(e) => setTask(e.target.value)}
+                />  
               </TextField>
-              <IconButton aria-label="add" onClick={newTask}>
+              <IconButton aria-label="add" onClick={() => handleTask(task)}>
                 <CheckIcon />
               </IconButton>
             </div>
