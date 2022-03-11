@@ -7,10 +7,13 @@ import IconButton from '@mui/material/IconButton';
 import AddIcon from '@mui/icons-material/Add';
 import CloseIcon from '@mui/icons-material/Close';
 import CheckIcon from '@mui/icons-material/Check';
-// import TextInput from "./TextInput";
-import { Input, TextField } from "@mui/material";
+import Checkbox from '@mui/material/Checkbox';
+import TextInput from "./TextInput";
 // import "./TextInput.css";
-import OppositeContentTimeline from "./Timeline";
+// import OppositeContentTimeline from "./Timeline";
+import { Input, TextField } from "@mui/material";
+import { ResetTvRounded } from "@mui/icons-material";
+
 
 
 
@@ -70,6 +73,7 @@ const onDragEnd = (result, columns, setColumns) => {
 
 function App() {
   const[popUp, setPopUp] = useState(false)
+  // const [task, setTask] = useState([]);
 
   function click(){
     setPopUp(true)
@@ -79,53 +83,66 @@ function App() {
     setPopUp(false)
   }
 
-  function NewTask(props) {
-    setPopUp(false)
-    const { handleTask } = props;
-    
-    const [task, setTask] = useState([]);
-
-    function TaskCard(props) {
-      const {task} = props
-      return (
-        {id: uuid(), content: task}
-      )
+  function create(text) {
+    newTask(text);
+  }
+  
+  function newTask(text) {
+  setPopUp(false)   
+    if (!text()) return;
+      const newTask1 = {
+        id: uuid(), content: text,  
+      };
+    create(newTask1);
+        
+    function TextInput(props) {
+    const [text, setText] = useState("");
+    }
+  
+    function onKeyPress(e) {
+      if (e.key === "Enter") {
+        create();
+      }
     }
   }
 
+
+  // draggable component
   const [columns, setColumns] = useState(columnsFromBackend);
   return (
     <div style={{ display: "flex", justifyContent: "center", height: "100%", }}>
+        {/* title headers */}
         <div className="timetable-header"> SCHEDULE </div>
         <div className="task-header"> TO-DO
+        {/* pop-up screen button */}
           <Fab color="white" aria-label="add" onClick={click}>
             <AddIcon />
           </Fab>
         </div>
-
+        {/* pop-up code with background blur, text input, close button, new task button */}
         {popUp===true &&
         <div className="popUp">             
           <div className="task-popUp"> 
             <div className="popUp-header">
+              {/* close pop-up */}
               <IconButton aria-label="add" onClick={close}>
                   <CloseIcon />
               </IconButton>
             </div>
+            {/* text field for new task input */}
             <div className="popUp-textfield">
               <TextField id="outlined-basic" label="New Task" variant="outlined"> 
-                <input
-                  type="text"
-                  name="task"
-                  onChange={(e) => setTask(e.target.value)}
-                />  
+                <TextInput onClick={()=>create()}/>
               </TextField>
-              <IconButton aria-label="add" onClick={() => handleTask(task)}>
+              {/* button to create new task */}
+              <IconButton aria-label="add" onClick={()=>create()}>
                 <CheckIcon />
               </IconButton>
             </div>
           </div>
         </div>}
           
+      {/* more draggable code - drag & drop interaction */}
       <DragDropContext
         onDragEnd={result => onDragEnd(result, columns, setColumns)}
       >
@@ -184,6 +201,7 @@ function App() {
                                     }}
                                   >
                                     {item.content}
+                                    <Checkbox/>
                                   </div>
                                 );
                               }}
