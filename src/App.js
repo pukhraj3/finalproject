@@ -8,72 +8,99 @@ import AddIcon from '@mui/icons-material/Add';
 import CloseIcon from '@mui/icons-material/Close';
 import CheckIcon from '@mui/icons-material/Check';
 import Checkbox from '@mui/material/Checkbox';
-import TextInput from "./TextInput";
+import { Input, TextField } from "@mui/material";
+// import TextInput from "./TextInput";
 // import "./TextInput.css";
 // import OppositeContentTimeline from "./Timeline";
-import { Input, TextField } from "@mui/material";
 import { ResetTvRounded } from "@mui/icons-material";
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
 
-
-
-
-const itemsFromBackend = [
-  { id: uuid(), content: "Water Plants" },
-  { id: uuid(), content: "Walk Dog" },
-  { id: uuid(), content: "HW5" },
-  { id: uuid(), content: "Charge Crystals" },
-  { id: uuid(), content: "Eat Dinner" }
-];
-
-const columnsFromBackend = {
-  [uuid()]: {
-    items: itemsFromBackend
-  },
-  [uuid()]: {
-    items: []
-  }
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyCuVgdiQSQwwFo372qNj_Ldd2fFChFoLnM",
+  authDomain: "t4skly.firebaseapp.com",
+  projectId: "t4skly",
+  storageBucket: "t4skly.appspot.com",
+  messagingSenderId: "243734276570",
+  appId: "1:243734276570:web:68d5a67cf9c90f26cc38e3"
 };
 
-const onDragEnd = (result, columns, setColumns) => {
-  if (!result.destination) return;
-  const { source, destination } = result;
-
-  if (source.droppableId !== destination.droppableId) {
-    const sourceColumn = columns[source.droppableId];
-    const destColumn = columns[destination.droppableId];
-    const sourceItems = [...sourceColumn.items];
-    const destItems = [...destColumn.items];
-    const [removed] = sourceItems.splice(source.index, 1);
-    destItems.splice(destination.index, 0, removed);
-    setColumns({
-      ...columns,
-      [source.droppableId]: {
-        ...sourceColumn,
-        items: sourceItems
-      },
-      [destination.droppableId]: {
-        ...destColumn,
-        items: destItems
-      }
-    });
-  } else {
-    const column = columns[source.droppableId];
-    const copiedItems = [...column.items];
-    const [removed] = copiedItems.splice(source.index, 1);
-    copiedItems.splice(destination.index, 0, removed);
-    setColumns({
-      ...columns,
-      [source.droppableId]: {
-        ...column,
-        items: copiedItems
-      }
-    });
-  }
-};
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
 
 function App() {
+
+  // list of tasks in schedule section
+  const scheduleListItems = [
+    { id: uuid(), content: "Charge Crystals" },
+    { id: uuid(), content: "Eat Dinner" }
+  ];
+
+  // list of tasks in to-do section
+  const taskListItems = [
+    { id: uuid(), content: "Water Plants" },
+    { id: uuid(), content: "HW5" },
+  ]
+
+  // green columns that harbor task cards
+  const columnsFromBackend = {
+    [uuid()]: {
+      items: scheduleListItems
+    },
+    [uuid()]: {
+      items: taskListItems
+    }
+  };
+
+  const onDragEnd = (result, columns, setColumns) => {
+    if (!result.destination) return;
+    const { source, destination } = result;
+
+    if (source.droppableId !== destination.droppableId) {
+      const sourceColumn = columns[source.droppableId];
+      const destColumn = columns[destination.droppableId];
+      const sourceItems = [...sourceColumn.items];
+      const destItems = [...destColumn.items];
+      const [removed] = sourceItems.splice(source.index, 1);
+      destItems.splice(destination.index, 0, removed);
+      setColumns({
+        ...columns,
+        [source.droppableId]: {
+          ...sourceColumn,
+          items: sourceItems
+        },
+        [destination.droppableId]: {
+          ...destColumn,
+          items: destItems
+        }
+      });
+    } else {
+      const column = columns[source.droppableId];
+      const copiedItems = [...column.items];
+      const [removed] = copiedItems.splice(source.index, 1);
+      copiedItems.splice(destination.index, 0, removed);
+      setColumns({
+        ...columns,
+        [source.droppableId]: {
+          ...column,
+          items: copiedItems
+        }
+      });
+    }
+  };
+
   const[popUp, setPopUp] = useState(false)
-  // const [task, setTask] = useState([]);
+  // list for tasks and list for schedule
+  // const[tasklist] = useState(false)
+  // const[schedulelist] = useState(false)
+
+  const [task, setTask] = React.useState();
+  const create = (event) => {
+    setTask(event.target.value);
+  }
 
   function click(){
     setPopUp(true)
@@ -83,27 +110,25 @@ function App() {
     setPopUp(false)
   }
 
-  function create(text) {
-    newTask(text);
-  }
+  // function create(text) {
+  //   newTask(text);
+  // }
+  // function TextInput(props) {
+  //   const [text, setText] = useState("");
+  // }
+
+  // function onKeyPress(e) {
+  //   if (e.key === "Enter") {
+  //     create();
+  //   }
+  // }
   
-  function newTask(text) {
+  function newTask(task) {
   setPopUp(false)   
-    if (!text()) return;
-      const newTask1 = {
-        id: uuid(), content: text,  
-      };
-    create(newTask1);
-        
-    function TextInput(props) {
-    const [text, setText] = useState("");
-    }
-  
-    function onKeyPress(e) {
-      if (e.key === "Enter") {
-        create();
-      }
-    }
+    if (!task()) return;
+      const taskListItems = {
+        id: uuid(), content: task,  
+      };        
   }
 
 
@@ -132,10 +157,10 @@ function App() {
             {/* text field for new task input */}
             <div className="popUp-textfield">
               <TextField id="outlined-basic" label="New Task" variant="outlined"> 
-                <TextInput onClick={()=>create()}/>
+                <Input inputProps={create} />
               </TextField>
               {/* button to create new task */}
-              <IconButton aria-label="add" onClick={()=>create()}>
+              <IconButton aria-label="add" onClick={()=>newTask(task)}>
                 <CheckIcon />
               </IconButton>
             </div>
@@ -152,19 +177,23 @@ function App() {
               style={{
                 display: "flex",
                 flexDirection: "column",
-                alignItems: "center"
+                alignItems: "center",
               }}
               key={columnId}
             >
               <h2>{column.name}</h2>
-              <div style={{ margin: 8 }}>
+              <div style={{ margin: 8, }}>
                 <Droppable droppableId={columnId} key={columnId}>
                   {(provided, snapshot) => {
                     return (
                       <div
                         {...provided.droppableProps}
                         ref={provided.innerRef}
+                        // edits style for cards within green containers
                         style={{
+                          // display: "flex",
+                          // flexDirection: "column",
+                          alignItems: "center",
                           background: snapshot.isDraggingOver
                             ? "#B2C3A7"
                             : "#90A583",
@@ -187,7 +216,12 @@ function App() {
                                     ref={provided.innerRef}
                                     {...provided.draggableProps}
                                     {...provided.dragHandleProps}
+                                    // edits style for content within cards
                                     style={{
+                                      display:"flex",
+                                      flexDirection:"row",
+                                      alignItems:"center",
+                                      justifyContent:"center",
                                       userSelect: "none",
                                       padding: 20,
                                       margin: "30px 50px 10px 50px",
@@ -201,7 +235,7 @@ function App() {
                                     }}
                                   >
                                     {item.content}
-                                    <Checkbox/>
+                                    {<Checkbox/>}
                                   </div>
                                 );
                               }}
